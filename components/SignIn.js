@@ -1,3 +1,4 @@
+import { Modal } from "antd";
 import styles from "../styles/SignIn.module.css";
 
 export default function SignIn() {
