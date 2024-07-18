@@ -59,7 +59,7 @@ export default function SignIn() {
       >
         <div>
           <FontAwesomeIcon icon={faXTwitter} className={styles.logo} />
-          <h2>Create your Hackatweet account</h2>
+          <h2 className={styles.title}>Connect to Hackatweet</h2>
           <input
             type="text"
             placeholder="Username"
