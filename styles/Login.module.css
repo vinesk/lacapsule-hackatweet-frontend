@@ -1,0 +1,44 @@
+.loginContainer {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  height: 100vh;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-xl);
+  background: center / cover no-repeat url("../public/background.jpg");
+  color: var(--white);
+}
+
+.logo {
+  font-size: 10rem;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: var(--font-family-heading);
+
+  padding: var(--spacing-xl);
+  gap: var(--spacing-lg);
+}
+
+.icon {
+  font-size: 2rem;
+}
+
+.title {
+  font-size: 4rem;
+  padding: 2rem 0;
+}
+
+.subtitle {
+  font-size: 2rem;
+}
+
+.paragraph {
+}
