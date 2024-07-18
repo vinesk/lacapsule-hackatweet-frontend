@@ -1,22 +1,102 @@
-.main {
+.container{
+  background-color:#151D27;
+  grid-template-rows: repeat(20, 1fr);
+  display: grid;
+  height: 100vh;
+  width: 100vw;
+}
+
+.leftContainer{
+  grid-column-start: 1;
+  grid-column-end: 6;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  height: 100vh;
+  width: 100%;
+}
+
+.logo{
+  margin-top: 10px;
+  margin-left: 10px;
+  height: 40px;
+  width: 40px;
+}
+
+
+.centerContainer{
+  border-left: 1px grey solid;
+  border-right: 1px grey solid;
+  display: flex;
+  flex-direction: column;
+  grid-column-start: 6;
+  grid-column-end: 14;
+  height: 100vh;
+  width: 100%;
+}
+
+.tweetsContainer{
+  display:flex;
+  flex-direction: column;
+}
+
+.rightContainer{
+  grid-column-start: 14;
+  grid-column-end: 21;
+  display: flex;
+  flex-direction:column;
+  height: 100vh;
+  width: 100%;
+}
+
+.HashtagsContainer{
+  border-radius: 10px;
+  background-color:#1B232C;
+  width:90%;
+}
+
+.white{
+  color:white;
+}
+
+.title{
+  color:white;
+  margin-right: 60px;
+}
+
+.center{
+  display:flex;
+  flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-  padding: 4rem 0;
 }
 
-.title {
-  line-height: 1.15;
-  font-size: 4rem;
+.tweetBtn{
+  border-radius: 50px;
+  border:none;
+  text-align: center;
+  color:white;
+  background-color: #3690ED;
+  height: 20px;
+  width:50px;
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
+.tweetBtn:hover{
+  color: #3690ED;
+  background-color:white;
+  cursor: pointer;
 }
 
-.title a:hover, .title a:focus, .title a:active {
-  text-decoration: underline;
+.fieldData{
+  display:flex;
+  justify-content: end;
+  align-items: center;
 }
+
+.textarea{
+  background-color: #151D27;
+  color:white;
+}
+
+.grey{
+  color:grey;
+}
+
