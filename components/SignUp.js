@@ -44,7 +44,6 @@ export default function SignUp() {
           setIsModalOpen(false);
           router.push("/");
         }
-        console.log(data.result ? "Sign up successful" : data.error);
       });
   };
 
