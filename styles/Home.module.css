@@ -5,18 +5,18 @@
 
 /* Handle */
 .tweetsContainer::-webkit-scrollbar-thumb {
-  background: #151D27;
+  background: transparent;
   border-radius: 1px;
 }
 
 /* Handle on hover */
 .tweetsContainer::-webkit-scrollbar-thumb:hover {
-  background:#151D27;
+  background: transparent;
 }
 
 .container{
-  background-color:#151D27;
-  grid-template-rows: repeat(20, 1fr);
+  background-color:
+  grid-template-columns: repeat(20, 1fr);
   display: grid;
   height: 100vh;
   width: 100vw;
@@ -47,7 +47,6 @@
   grid-column-start: 6;
   grid-column-end: 14;
   height: 100vh;
-  width: 100%;
 }
 
 .tweetsContainer{
@@ -112,6 +111,14 @@
 .textarea{
   background-color: #151D27;
   color:white;
+  border-top:none;
+  border-left: none;
+  border-right:none;
+  width: 100%;
+  max-width:100%;
+  max-height: 80px;
+  min-width:100%;
+  min-height: 80px ;
 }
 
 .grey{

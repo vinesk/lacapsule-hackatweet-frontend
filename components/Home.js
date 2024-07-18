@@ -53,7 +53,7 @@ function Home() {
         </div>
         <div className={styles.centerContainer}>
           <h3 className={styles.title}>Home</h3>
-          <textarea className={styles.textarea}  rows="2" cols="1" placeholder="What's up?" value={fieldTweet} onChange={(e)=>setFieldTweet(e.target.value)}/>
+          <textarea className={styles.textarea}  rows="4" cols="1" placeholder="What's up?" maxLength={280} value={fieldTweet} onChange={(e)=>setFieldTweet(e.target.value)}/>
           <div className={styles.fieldData}>
             <p className={styles.white}>{fieldTweet.length}<spna>/280</spna></p>
             <button  className={styles.tweetBtn} onClick={()=>handleTweetBtn()}>Tweet</button>
