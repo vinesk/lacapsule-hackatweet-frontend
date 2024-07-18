@@ -1,10 +1,11 @@
+import Link from "next/link";
 import styles from "../styles/Home.module.css";
-import Test from "./Test";
 
 function Home() {
   return (
     <div>
-      <Test />
+      <Link href="/login">Login</Link>
+      <Link href="/hashtag">Hashtag</Link>
     </div>
   );
 }
