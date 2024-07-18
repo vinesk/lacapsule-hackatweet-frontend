@@ -11,7 +11,7 @@ export const tweetsSlice = createSlice({
     addTweetsToStorage: (state, action) => {
       state.value.push(action.payload)
     },
-    updateLikeTweet:(state, action)=>{
+    updateLikeTweet:(state, action)=>{///changer message par id
         for(let tweet of state.value){
             if (tweet.message==action.payload.message){
                 if(action.payload.likes.includes(action.payload.user)){
@@ -22,9 +22,12 @@ export const tweetsSlice = createSlice({
               break;
             }
         }
+    },
+    deleteTweetToStorage: (state, action) => {///changer message par id
+      state.value=state.value.filter(tweet=> tweet.message!==action.payload.message)
     }
   },
 });
 
-export const { addTweetsToStorage ,updateLikeTweet} = tweetsSlice.actions;
+export const { addTweetsToStorage ,updateLikeTweet,deleteTweetToStorage} = tweetsSlice.actions;
 export default tweetsSlice.reducer;

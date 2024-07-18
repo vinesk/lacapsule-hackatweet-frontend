@@ -14,6 +14,23 @@
   background:transparent;
 }
 
+/* width (epaisseur scrollbar)*/
+.textarea::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Handle */
+.textarea::-webkit-scrollbar-thumb {
+  background:transparent;
+  border-radius: 1px;
+}
+
+/* Handle on hover */
+.textarea::-webkit-scrollbar-thumb:hover {
+  background:transparent;
+}
+
+
 .container{
   background-color:#151D27;
   grid-template-columns: repeat(20, 1fr);
@@ -32,8 +49,8 @@
 }
 
 .logo{
-  margin-top: 10px;
-  margin-left: 10px;
+  margin-top: 20px;
+  margin-left: 20px;
   height: 40px;
   width: 40px;
 }
@@ -54,6 +71,7 @@
   display:flex;
   flex-direction: column;
   overflow: auto;
+  overflow-x:hidden
 }
 
 .rightContainer{
@@ -77,7 +95,7 @@
 
 .title{
   color:white;
-  margin-right: 60px;
+  margin-left: 20px;
 }
 
 .center{
@@ -94,6 +112,8 @@
   background-color: #3690ED;
   height: 20px;
   width:50px;
+  margin-left:20px;
+  margin-right:20px;
 }
 
 .tweetBtn:hover{
@@ -114,11 +134,12 @@
   border-top:none;
   border-left: none;
   border-right:none;
-  width: 100%;
-  max-width:100%;
-  max-height: 80px;
-  min-width:100%;
-  min-height: 80px ;
+  width: 80%;
+  max-width:80%;
+  max-height: 50px;
+  min-width:80%;
+  min-height: 50px ;
+  overflow-y: hidden;
 }
 
 .grey{
