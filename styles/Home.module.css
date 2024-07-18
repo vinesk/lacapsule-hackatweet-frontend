@@ -1,3 +1,19 @@
+/* width (epaisseur scrollbar)*/
+.tweetsContainer::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Handle */
+.tweetsContainer::-webkit-scrollbar-thumb {
+  background: #151D27;
+  border-radius: 1px;
+}
+
+/* Handle on hover */
+.tweetsContainer::-webkit-scrollbar-thumb:hover {
+  background:#151D27;
+}
+
 .container{
   background-color:#151D27;
   grid-template-rows: repeat(20, 1fr);
@@ -35,8 +51,10 @@
 }
 
 .tweetsContainer{
+  height: 100vh;
   display:flex;
   flex-direction: column;
+  overflow: auto;
 }
 
 .rightContainer{
