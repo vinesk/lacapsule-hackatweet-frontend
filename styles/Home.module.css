@@ -5,13 +5,13 @@
 
 /* Handle */
 .tweetsContainer::-webkit-scrollbar-thumb {
-  background: #151D27;
+  background:transparent;
   border-radius: 1px;
 }
 
 /* Handle on hover */
 .tweetsContainer::-webkit-scrollbar-thumb:hover {
-  background:#151D27;
+  background:transparent;
 }
 
 .container{
