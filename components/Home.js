@@ -9,7 +9,7 @@ import { addTweetsToStorage,updateLikeTweet } from '../reducers/tweets';
 
 function Home() {
   const[fieldTweet,setFieldTweet]=useState("What's up?")
-  const[isLiked,setIsliked]=useState(false)
+  //const[isLiked,setIsliked]=useState(false)
   const[hashtags,setHashtags]=useState([])
 
   const tweets=useSelector((state)=>state.tweets.value)
@@ -37,13 +37,12 @@ function Home() {
 
   function updateLike(props){
     dispatch(updateLikeTweet(props));
-    setIsliked(!isLiked);
   }
   
   const listHashtags=hashtags.map((h)=>{
     return <div><div className={styles.white}>{h}</div> <p className={styles.grey}>{hashtags.filter(x=> x==h).length} <span>Tweet{hashtags.length>1&& 's'}</span></p></div>
   })
-  const listTweets=tweets.map((tweet)=> {return <Tweet {...tweet} updateLike={updateLike} isLiked={isLiked}/> ;})
+  const listTweets=tweets.map((tweet)=> {return <Tweet {...tweet} updateLike={updateLike}/> ;})
   return (
     <div>
       <div className={styles.container}>

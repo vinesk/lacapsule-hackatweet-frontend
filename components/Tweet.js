@@ -5,7 +5,7 @@ import { faHeart} from '@fortawesome/free-solid-svg-icons';
 
 
 function Tweet(props) { 
-const style= props.isLiked?{'color':'red'}:{'color':'white'}
+const style= props.likes.length>0?{'color':'red'}:{'color':'white'}
   return (
     <div className={styles.tweet}>
         <p style={{'color':'white'}}>{props.message}</p>
