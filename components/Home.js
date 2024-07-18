@@ -18,7 +18,8 @@ function Home() {
 
   function handleTweetBtn(){
 
-    let hashtag=fieldTweet.match(/#\w*/ig)
+    let match=fieldTweet.match(/#\w*/ig)
+    let hashtag=[...new Set(match)]
     console.log(hashtags)
     let likes=[];
     let newTweet={
@@ -29,7 +30,7 @@ function Home() {
       hashtags:hashtag,
     }
     dispatch(addTweetsToStorage(newTweet))
-    if(hashtag){
+    if(hashtag ){
       setHashtags([...hashtags,...hashtag])
     }
     setFieldTweet('')
@@ -39,8 +40,9 @@ function Home() {
     dispatch(updateLikeTweet(props));
   }
   
-  const listHashtags=hashtags.map((h)=>{
-    return <div><div className={styles.white}>{h}</div> <p className={styles.grey}>{hashtags.filter(x=> x==h).length} <span>Tweet{hashtags.length>1&& 's'}</span></p></div>
+  const listHashtags=[...new Set(hashtags)].map((h)=>{
+    const nbH=hashtags.filter(x=> x==h).length;
+    return <div><div className={styles.white}>{h}</div> <p className={styles.grey}>{nbH} <span>Tweet{nbH>1&& 's'}</span></p></div>
   })
   const listTweets=tweets.map((tweet)=> {return <Tweet {...tweet} updateLike={updateLike}/> ;})
   return (
