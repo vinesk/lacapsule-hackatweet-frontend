@@ -5,17 +5,17 @@
 
 /* Handle */
 .tweetsContainer::-webkit-scrollbar-thumb {
-  background: transparent;
+  background: #151D27;
   border-radius: 1px;
 }
 
 /* Handle on hover */
 .tweetsContainer::-webkit-scrollbar-thumb:hover {
-  background: transparent;
+  background:#151D27;
 }
 
 .container{
-  background-color:
+  background-color:#151D27;
   grid-template-columns: repeat(20, 1fr);
   display: grid;
   height: 100vh;
