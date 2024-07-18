@@ -1,16 +1,14 @@
-.loginContainer {
+.mainContainer {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  height: 100vh;
+  grid-template-columns: 2fr 3fr;
+  min-height: 100vh;
 }
 
 .logoContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: var(--spacing-xl);
   background: center / cover no-repeat url("../public/background.jpg");
-  color: var(--white);
 }
 
 .logo {
@@ -21,8 +19,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-family: var(--font-family-heading);
-
   padding: var(--spacing-xl);
   gap: var(--spacing-lg);
 }
@@ -33,12 +29,21 @@
 
 .title {
   font-size: 4rem;
-  padding: 2rem 0;
+  margin: var(--spacing-lg) 0;
 }
 
 .subtitle {
-  font-size: 2rem;
+  font-size: 1.5rem;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
 }
 
 .paragraph {
+  font-family: var(--font-family-heading);
+  font-size: 0.75rem;
 }

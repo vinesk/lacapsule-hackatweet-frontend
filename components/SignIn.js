@@ -3,10 +3,12 @@ import { useDispatch } from "react-redux";
 import { login } from "../reducers/user";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
-import { Button, Modal } from "antd";
+import { Modal } from "antd";
+import { useRouter } from "next/router";
 import styles from "../styles/SignIn.module.css";
 
 export default function SignIn() {
+  const router = useRouter();
   const dispatch = useDispatch();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -38,45 +40,41 @@ export default function SignIn() {
           setUsername("");
           setPassword("");
           setIsModalOpen(false);
+          router.push("/");
         }
-        console.log(data.result ? "Sign in successful" : data.error);
       });
   };
 
   return (
     <div>
-      <Button className={styles.button} onClick={showModal}>
+      <button className="btnPrimary" onClick={showModal}>
         Sign in
-      </Button>
+      </button>
       <Modal
-        className={styles.modal}
+        className="modal"
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}
         footer={null}
       >
-        <div className={styles.signInContainer}>
+        <div>
           <FontAwesomeIcon icon={faXTwitter} className={styles.logo} />
           <h2>Create your Hackatweet account</h2>
-          <div>
-            <input
-              type="text"
-              placeholder="Username"
-              className={styles.input}
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Password"
-              className={styles.input}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <Button className={styles.button} onClick={handleSignIn}>
-              Sign in
-            </Button>
-          </div>
+          <input
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className="btnWhite" onClick={handleSignIn}>
+            Sign in
+          </button>
         </div>
       </Modal>
     </div>

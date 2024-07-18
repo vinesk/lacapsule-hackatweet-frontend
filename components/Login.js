@@ -6,7 +6,7 @@ import SignIn from "./SignIn";
 
 export default function Login() {
   return (
-    <div className={styles.loginContainer}>
+    <div className={styles.mainContainer}>
       <div className={styles.logoContainer}>
         <FontAwesomeIcon icon={faXTwitter} className={styles.logo} />
       </div>
@@ -17,9 +17,11 @@ export default function Login() {
           happening
         </h1>
         <h2 className={styles.subtitle}>Join Hackatweet today.</h2>
-        <SignUp />
-        <p className={styles.paragraph}>Already have an account?</p>
-        <SignIn />
+        <div className={styles.buttonContainer}>
+          <SignUp />
+          <p className={styles.paragraph}>Already have an account?</p>
+          <SignIn />
+        </div>
       </div>
     </div>
   );
