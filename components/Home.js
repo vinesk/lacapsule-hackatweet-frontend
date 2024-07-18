@@ -5,16 +5,20 @@ import { faXTwitter} from '@fortawesome/free-brands-svg-icons';
 import {useState} from 'react';
 import Tweet from './Tweet';
 import { addTweetsToStorage,updateLikeTweet } from '../reducers/tweets';
+
+
 function Home() {
   const[fieldTweet,setFieldTweet]=useState("What's up?")
   const[isLiked,setIsliked]=useState(false)
+  const[hashtags,setHashtags]=useState([])
+
   const tweets=useSelector((state)=>state.tweets.value)
   const dispatch=useDispatch();
 
 
   function handleTweetBtn(){
 
-    let hashtags=fieldTweet.match(/#\w*/ig)
+    let hashtag=fieldTweet.match(/#\w*/ig)
     console.log(hashtags)
     let likes=[];
     let newTweet={
@@ -22,9 +26,12 @@ function Home() {
       message:fieldTweet,
       likes:likes,
       date:new Date(),
-      hashtags:hashtags,
+      hashtags:hashtag,
     }
     dispatch(addTweetsToStorage(newTweet))
+    if(hashtag){
+      setHashtags([...hashtags,...hashtag])
+    }
     setFieldTweet('')
   }
 
@@ -33,7 +40,9 @@ function Home() {
     setIsliked(!isLiked);
   }
   
-  const Hashtags=[<div className={styles.white}>#hashtag</div>]
+  const listHashtags=hashtags.map((h)=>{
+    return <div><div className={styles.white}>{h}</div> <p className={styles.grey}>{hashtags.filter(x=> x==h).length} <span>Tweet{hashtags.length>1&& 's'}</span></p></div>
+  })
   const listTweets=tweets.map((tweet)=> {return <Tweet {...tweet} updateLike={updateLike} isLiked={isLiked}/> ;})
   return (
     <div>
@@ -56,11 +65,9 @@ function Home() {
           <h3 className={styles.white}>Trends</h3>
           <div className={styles.center}>
             <div className={styles.HashtagsContainer}>
-              {Hashtags}
-              <p className={styles.grey}>{Hashtags.length} <span>Tweet{Hashtags.length>1&& 's'}</span></p>
+              {listHashtags}
             </div>
           </div>
-          
         </div>
       </div>
     </div>
