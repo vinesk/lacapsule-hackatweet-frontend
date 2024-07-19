@@ -13,9 +13,9 @@ export const tweetsSlice = createSlice({
     },
     updateLikeTweet:(state, action)=>{///changer message par id
         for(let tweet of state.value){
-            if (tweet.message==action.payload.message){
+            if (tweet.user==action.payload.user){
                 if(action.payload.likes.includes(action.payload.user)){
-                    tweet.likes=action.payload.likes.filter(user=>user.name!=action.payload.name)
+                    tweet.likes=action.payload?.likes.filter((user)=>user?.id!=action.payload.id)
                 }else{
                     tweet.likes.push(action.payload.user);
                 }
@@ -24,8 +24,9 @@ export const tweetsSlice = createSlice({
         }
     },
     deleteTweetToStorage: (state, action) => {///changer message par id
-      //if(state.value.user) verifier que l'user est l'auteur du tweet
-        state.value=state.value.filter(tweet=> tweet.message!==action.payload.message)
+      if(action.payload.username==state.value.username){
+        state.value=state.value.filter(tweet=> tweet.id!==action.payload.id)
+      }
     }
   },
 });

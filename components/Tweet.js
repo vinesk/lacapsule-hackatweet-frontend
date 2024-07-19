@@ -22,7 +22,7 @@ const style= props.likes.length>0?{'color':'red'}:{'color':'white'}
   return (
     <div className={styles.tweet}>
         <div className={styles.tweetDataPost}>
-          <p className={styles.userName}>{props.user}</p>
+          <p className={styles.userName}>{props.username}</p>
           <p className={styles.time}>{displayTime(props)}</p>
         </div>
         <p className={styles.message}style={{'color':'white'}}>{message(props)}</p>

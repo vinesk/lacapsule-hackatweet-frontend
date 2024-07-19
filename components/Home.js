@@ -7,7 +7,7 @@ import { faXTwitter} from '@fortawesome/free-brands-svg-icons';
 
 import {useState} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addTweetsToStorage,updateLikeTweet,deleteTweetToStorage} from '../reducers/tweets';
+import { addTweetsToStorage,updateLikeTweet,deleteTweetToStorage,updateTweetsToStorage} from '../reducers/tweets';
 import { addHashtagsToStorage,updateHashtagsToStorage} from '../reducers/hashtags';
 
 
@@ -59,7 +59,7 @@ function Home() {
         console.log(data)
         dispatch(addTweetsToStorage({
           id:data.id._id,
-          user:user.username,
+          user:data.user,
           message:data.id.message,
           date:data.id.date,
           likes:data.id.likes,
@@ -71,10 +71,7 @@ function Home() {
           dispatch(updateHashtagsToStorage([...hashtags,...newHashtag]))
         }
       });
-
     }
-
-    //dispatch(addTweetsToStorage(newTweet))
     setFieldTweet('')
   }
 
@@ -82,13 +79,19 @@ function Home() {
     dispatch(updateLikeTweet(props));
   }
 
+  // function getTweet(){
+  //   fetch(`http://localhost:3000/tweets/`,{
+  //   }).then(response => response.json())
+  //     .then((data) => {
+  //       return data;
+  //     })
+  // }
+
   function deleteTweet(props){
-    // fetch(`http://localhost:3000/tweets/${props.id}`,{
-    //     method: 'DELETE'
-    // }).then(response => response.json())
-    // .then((data) => {
-      dispatch(deleteTweetToStorage(props));
-    // })
+    fetch(`http://localhost:3000/tweets/${props.id}`,{
+        method: 'DELETE'
+    }).then(response => response.json())
+    dispatch(deleteTweetToStorage(props));
   }
   
   const listHashtags=[...new Set(hashtags)].map((h)=>{
@@ -99,7 +102,7 @@ function Home() {
     </div>
     
   })
-  const listTweets=tweets.map((tweet,i)=> {return <Tweet key={i} {...tweet} updateLike={updateLike} deleteTweet={deleteTweet}/> ;})
+  const listTweets=tweets.map((tweet,i)=> {return <Tweet key={i} {...tweet} updateLike={() => updateLike({...tweet})} deleteTweet={deleteTweet}/> ;})
   return (
     <div>
       <div className={styles.container}>
