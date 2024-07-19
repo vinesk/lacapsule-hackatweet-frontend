@@ -24,7 +24,8 @@ export const tweetsSlice = createSlice({
         }
     },
     deleteTweetToStorage: (state, action) => {///changer message par id
-      state.value=state.value.filter(tweet=> tweet.message!==action.payload.message)
+      //if(state.value.user) verifier que l'user est l'auteur du tweet
+        state.value=state.value.filter(tweet=> tweet.message!==action.payload.message)
     }
   },
 });
