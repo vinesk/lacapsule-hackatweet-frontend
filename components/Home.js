@@ -25,9 +25,11 @@ export default function Home() {
   const [fieldTweet, setFieldTweet] = useState("");
 
   const handleTweetBtn = () => {
+    if (fieldTweet.length === 0) {
+      return alert("Ecris quelque chose !");
+    }
     const match = fieldTweet.match(/#\w*/gi);
     const newHashtag = [...new Set(match)];
-    // console.log(hashtags);
     const likes = [];
     const newTweet = {
       _id: 0,
