@@ -1,22 +1,73 @@
-.main {
+.mainContainer {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  min-height: 100vh;
+}
+
+.leftContainer {
+  padding: var(--spacing-lg);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+.logo {
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.userContainer {
+  display: flex;
   align-items: center;
-  min-height: 100vh;
-  padding: 4rem 0;
+  gap: var(--spacing-sm);
+}
+
+.userIcon {
+  font-size: 1.5rem;
+  background-color: var(--color-secondary);
+  padding: var(--spacing-sm);
+  border: none;
+  border-radius: 50%;
+}
+
+.userInfos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.userFirstname {
+  font-weight: 700;
+}
+
+.userUsername {
+  font-size: 0.875rem;
+  color: var(--color-tertiary);
+}
+
+.middleContainer {
+  border-left: 1px solid var(--color-tertiary);
+  border-right: 1px solid var(--color-tertiary);
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+}
+
+.middleContainer > div {
+  padding: var(--spacing-lg);
 }
 
 .title {
-  line-height: 1.15;
-  font-size: 4rem;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-h2);
 }
 
-.title a {
-  color: #0070f3;
-  text-decoration: none;
+.middleMiddle {
+  border-top: 1px solid var(--color-tertiary);
+  border-bottom: 1px solid var(--color-tertiary);
 }
 
-.title a:hover, .title a:focus, .title a:active {
-  text-decoration: underline;
+.rightContainer {
+  padding: var(--spacing-lg);
 }

@@ -22,8 +22,8 @@
   --font-size-h3: 1.25rem;
 
   /* Spacing */
-  --spacing-xs: 0.25rem;
-  --spacing-sm: 0.5rem;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
   --spacing-md: 1rem;
   --spacing-lg: 1.5rem;
   --spacing-xl: 2rem;
@@ -60,6 +60,10 @@ h3 {
 
 a {
   text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
   color: var(--color-secondary);
 }
 
@@ -122,4 +126,8 @@ input {
 
 .modal .ant-modal-close {
   color: var(--white);
+}
+
+.modal .ant-modal-close:hover {
+  color: var(--color-secondary);
 }

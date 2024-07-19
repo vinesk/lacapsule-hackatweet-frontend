@@ -15,18 +15,6 @@ export default function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
   const handleSignIn = () => {
     fetch("http://localhost:3000/users/signin", {
       method: "POST",
@@ -36,25 +24,33 @@ export default function SignIn() {
       .then((response) => response.json())
       .then((data) => {
         if (data.result) {
-          dispatch(login({ token: data.token, username: data.username }));
+          dispatch(
+            login({
+              token: data.user.token,
+              firstname: data.user.firstname,
+              username: username,
+            })
+          );
           setUsername("");
           setPassword("");
           setIsModalOpen(false);
           router.push("/");
+        } else {
+          alert(data.error);
         }
       });
   };
 
   return (
     <div>
-      <button className="btnPrimary" onClick={showModal}>
+      <button className="btnPrimary" onClick={() => setIsModalOpen(true)}>
         Sign in
       </button>
       <Modal
         className="modal"
         open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
+        onOk={() => setIsModalOpen(false)}
+        onCancel={() => setIsModalOpen(false)}
         footer={null}
       >
         <div>
