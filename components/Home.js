@@ -15,6 +15,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import Tweet from "./Tweet";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
+import Trends from "./Trends";
 
 export default function Home() {
   const user = useSelector((state) => state.user.value);
@@ -77,7 +78,7 @@ export default function Home() {
     <div>
       <div className={styles.mainContainer}>
         <div className={styles.leftContainer}>
-          <Link href="/login">
+          <Link href="/">
             <FontAwesomeIcon icon={faXTwitter} className={styles.logo} />
           </Link>
           <div className={styles.userContainer}>
@@ -117,7 +118,8 @@ export default function Home() {
 
         <div className={styles.rightContainer}>
           <h3 className={styles.title}>Trends</h3>
-          <div className={styles.HashtagsContainer}>{listHashtags}</div>
+          {/* <div className={styles.HashtagsContainer}>{listHashtags}</div> */}
+          <Trends />
         </div>
       </div>
     </div>

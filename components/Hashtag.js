@@ -1,39 +1,59 @@
-import styles from "../styles/Hashtag.module.css";
-
+import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import Tweet from "./Tweet";
+import Link from "next/link";
+import styles from "../styles/Hashtag.module.css";
+import Trends from "./Trends";
 
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+export default function Hashtag() {
+  const user = useSelector((state) => state.user.value);
+  const hashtags = useSelector((state) => state.hashtags.value);
+  const tweets = useSelector((state) => state.tweets.value);
+  const dispatch = useDispatch();
 
-function Hashtag() {
+  const listTweets = tweets.map((tweet) => (
+    <Tweet {...tweet} updateLike={updateLike} deleteTweet={deleteTweet} />
+  ));
+
   return (
     <div>
-      <div className={styles.container}>
+      <div className={styles.mainContainer}>
         <div className={styles.leftContainer}>
-          <FontAwesomeIcon
-            icon={faXTwitter}
-            onClick={() => {}}
-            className={styles.logo}
-            style={{ color: "white" }}
-          />
-          ;
-        </div>
-        <div className={styles.centerContainer}>
-          <h3 className={styles.title}>Home</h3>
-
-          <div className={styles.fieldData}></div>
-          <div className={styles.tweetsContainer}></div>
-        </div>
-        <div className={styles.rightContainer}>
-          <h3 className={styles.white}>Trends</h3>
-          <div className={styles.center}>
-            <div className={styles.HashtagsContainer}></div>
+          <Link href="/login">
+            <FontAwesomeIcon icon={faXTwitter} className={styles.logo} />
+          </Link>
+          <div className={styles.userContainer}>
+            <FontAwesomeIcon icon={faUser} className={styles.userIcon} />
+            <div className={styles.userInfos}>
+              <p className={styles.userFirstname}>{user.firstname}</p>
+              <p className={styles.userUsername}>@{user.username}</p>
+            </div>
           </div>
+        </div>
+
+        <div className={styles.middleContainer}>
+          <div className={styles.formContainer}>
+            <h3 className={styles.title}>Hashtag</h3>
+            <div className={styles.form}>
+              <input
+                className={styles.input}
+                type="text"
+                name="hashtag"
+                id="hashtag"
+              />
+            </div>
+          </div>
+          <div className={styles.tweetsContainer}>{listTweets}</div>
+        </div>
+
+        <div className={styles.rightContainer}>
+          <h3 className={styles.title}>Trends</h3>
+          <Trends />
         </div>
       </div>
     </div>
   );
 }
-
-export default Hashtag;

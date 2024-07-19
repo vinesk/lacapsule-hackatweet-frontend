@@ -98,4 +98,5 @@
   display: flex;
   flex-direction: column;
   padding: var(--spacing-lg);
+  gap: var(--spacing-lg);
 }
