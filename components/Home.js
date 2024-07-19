@@ -11,7 +11,7 @@ function Home() {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.leftContainer}>
-        <Link href="/login">
+        <Link href="/">
           <FontAwesomeIcon icon={faXTwitter} className={styles.logo} />
         </Link>
         <div className={styles.userContainer}>
