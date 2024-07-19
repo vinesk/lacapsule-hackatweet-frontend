@@ -1,0 +1,39 @@
+.tweet{
+    border-top: 1px grey solid;
+    color:white;
+  }
+
+.tweetBtnBox{
+  display:flex;
+  align-items: center;
+}
+
+.heart{
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.trash{
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.tweetDataPost{
+  display:flex;
+}
+.userName{
+  margin-left: 10px;
+  margin-right: 10px;
+  color:white;
+}
+
+.time{
+  color:grey; 
+}
+
+.message{
+  margin-left: 10px;
+  margin-right: 10px;
+}

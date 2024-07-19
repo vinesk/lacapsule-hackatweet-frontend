@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
-import styles from "../styles/Login.module.css";
 import SignUp from "./SignUp";
 import SignIn from "./SignIn";
+import styles from "../styles/Login.module.css";
 
 export default function Login() {
   return (

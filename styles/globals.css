@@ -5,7 +5,7 @@
 
 :root {
   /* Colors */
-  --color-primary: #14171a;
+  --color-primary: #131d27;
   --color-secondary: #1da1f2;
   --color-tertiary: #657786;
   --black: #000;
@@ -20,6 +20,7 @@
   --font-size-h1: 2rem;
   --font-size-h2: 1.5rem;
   --font-size-h3: 1.25rem;
+  --font-size-h3: 1.125rem;
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -61,6 +62,7 @@ h3 {
 a {
   text-decoration: none;
   color: inherit;
+  transition: all 0.3s ease;
 }
 
 a:hover {
@@ -109,6 +111,32 @@ input {
   color: white;
   border: 1px solid var(--color-tertiary);
   border-radius: 0.25rem;
+}
+
+input::placeholder {
+  color: var(--color-tertiary);
+}
+
+input:focus {
+  outline: none;
+}
+
+textarea {
+  width: 100%;
+  background-color: transparent;
+  color: white;
+  border: none;
+  border-bottom: 1px solid var(--color-tertiary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-h3);
+}
+
+textarea::placeholder {
+  color: var(--color-tertiary);
+}
+
+textarea:focus {
+  outline: none;
 }
 
 .modal .ant-modal-content {
