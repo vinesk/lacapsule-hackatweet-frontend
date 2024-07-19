@@ -1,6 +1,6 @@
 import styles from "../styles/Tweet.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faHeart, faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 const moment = require("moment");
 
 function Tweet(props) {
@@ -16,29 +16,30 @@ function Tweet(props) {
   function displayTime(props) {
     return moment(props.date).utcOffset(props.date).format("HH:mm:ss");
   }
-  const style = props.likes.length > 0 ? { color: "red" } : { color: "white" };
+  const style = props.likes.length > 0 ? { color: "#c32044" } : {};
   return (
-    <div className={styles.tweet}>
-      <div className={styles.tweetDataPost}>
-        <p className={styles.userName}>{props.user}</p>
-        <p className={styles.time}>{displayTime(props)}</p>
+    <div className={styles.tweetContainer}>
+      <div className={styles.tweetInfos}>
+        <FontAwesomeIcon icon={faUser} className={styles.userIcon} />
+        <span className={styles.userFirstname}>{props.firstname}</span>
+        <span className={styles.userUsername}>
+          @{props.username} • {displayTime(props)}
+        </span>
       </div>
-      <p className={styles.message} style={{ color: "white" }}>
-        {message(props)}
-      </p>
-      <div className={styles.tweetBtnBox}>
+      <p>{message(props)}</p>
+      <div className={styles.tweetBtns}>
+        <div className={styles.heartBtn} style={style}>
+          <FontAwesomeIcon
+            className={styles.icon}
+            icon={faHeart}
+            onClick={() => props.updateLike(props)}
+          />
+          <span>{props.likes.length}</span>
+        </div>
         <FontAwesomeIcon
-          className={styles.heart}
-          icon={faHeart}
-          onClick={() => props.updateLike(props)}
-          style={style}
-        />
-        <p>{props.likes.length}</p>
-        <FontAwesomeIcon
-          className={styles.trash}
+          className={styles.icon}
           icon={faTrash}
           onClick={() => props.deleteTweet(props)}
-          style={{ color: "white" }}
         />
       </div>
     </div>

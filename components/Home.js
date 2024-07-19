@@ -31,7 +31,8 @@ export default function Home() {
     const likes = [];
     const newTweet = {
       _id: 0,
-      user: "Jules",
+      firstname: "Vincent",
+      username: "vinesk",
       message: fieldTweet,
       likes: likes,
       date: Date(),
@@ -102,14 +103,14 @@ export default function Home() {
                 </span>
                 <button
                   className={`btnSecondary ${styles.submitBtn}`}
-                  onClick={() => handleTweetBtn()}
+                  onClick={handleTweetBtn}
                 >
                   Tweet
                 </button>
               </div>
             </div>
           </div>
-          {/* <div className={styles.tweetsContainer}>{listTweets}</div> */}
+          <div className={styles.tweetsContainer}>{listTweets}</div>
         </div>
 
         <div className={styles.rightContainer}>

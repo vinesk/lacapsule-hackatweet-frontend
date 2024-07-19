@@ -1,39 +1,46 @@
-.tweet{
-    border-top: 1px grey solid;
-    color:white;
-  }
+.tweetContainer {
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-lg);
+  gap: var(--spacing-md);
+  border-top: 1px solid var(--color-tertiary);
+}
 
-.tweetBtnBox{
-  display:flex;
+.tweetInfos {
+  display: flex;
   align-items: center;
+  gap: var(--spacing-xs);
 }
 
-.heart{
+.userIcon {
+  font-size: 1.5rem;
+  background-color: var(--color-secondary);
+  padding: var(--spacing-sm);
+  border: none;
+  border-radius: 50%;
+}
+
+.userFirstname {
+  font-weight: 700;
+}
+
+.userUsername {
+  font-size: 0.875rem;
+  color: var(--color-tertiary);
+}
+
+.tweetBtns {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.heartBtn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xxs);
+}
+
+.icon {
   cursor: pointer;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.trash{
-  cursor: pointer;
-  margin-left: 10px;
-  margin-right: 10px;
-}
-
-.tweetDataPost{
-  display:flex;
-}
-.userName{
-  margin-left: 10px;
-  margin-right: 10px;
-  color:white;
-}
-
-.time{
-  color:grey; 
-}
-
-.message{
-  margin-left: 10px;
-  margin-right: 10px;
 }
