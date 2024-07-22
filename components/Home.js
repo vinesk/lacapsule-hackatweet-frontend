@@ -162,7 +162,7 @@ function Home() {
     return <Trends key={i} trendCount={trendCount} trendName={hashtag} />
   })
 
-  const listTweets=tweets.map((tweet,i)=> {return <Tweet key={i} {...tweet} updateLike={updateLike} deleteTweet={deleteTweet}/> ;})
+  const listTweets=tweets.map((tweet,i)=> {return <Tweet key={i} {...tweet} updateLike={updateLike} deleteTweet={deleteTweet}/> ;}).reverse();
   return (
     <div>
       <div className={styles.mainContainer}>
