@@ -1,0 +1,49 @@
+.mainContainer {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  min-height: 100vh;
+}
+
+.logoContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: center / cover no-repeat url("../public/background.jpg");
+}
+
+.logo {
+  font-size: 10rem;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: var(--spacing-xl);
+  gap: var(--spacing-lg);
+}
+
+.icon {
+  font-size: 2rem;
+}
+
+.title {
+  font-size: 4rem;
+  margin: var(--spacing-lg) 0;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.paragraph {
+  font-family: var(--font-family-heading);
+  font-size: 0.75rem;
+}

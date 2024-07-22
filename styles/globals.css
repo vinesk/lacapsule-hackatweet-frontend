@@ -1,10 +1,172 @@
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+@font-face {
+  font-family: "Mont-Heavy";
+  src: url("../public/fonts/Mont-Heavy.otf") format("opentype");
+}
+
+:root {
+  /* Colors */
+  --color-primary: #131d27;
+  --color-secondary: #1da1f2;
+  --color-tertiary: #657786;
+  --color-trend: #1f2830;
+  --color-trend-hover: #272f36;
+  --black: #000;
+  --white: #fff;
+  --red: #c32044;
+
+  /* Font families */
+  --font-family-body: "Verdana", sans-serif;
+  --font-family-heading: "Mont-Heavy", sans-serif;
+
+  /* Font sizes */
+  --font-size-body: 1rem;
+  --font-size-h1: 2rem;
+  --font-size-h2: 1.5rem;
+  --font-size-h3: 1.25rem;
+  --font-size-h4: 1.125rem;
+
+  /* Spacing */
+  --spacing-xxs: 0.25rem;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 0.75rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 4rem;
 }
 
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body);
+  background-color: var(--color-primary);
+  color: var(--white);
+}
+
+h1 {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-h1);
+}
+
+h2 {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-family: var(--font-family-heading);
+  font-size: var(--font-size-h3);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--color-secondary);
+}
+
+button {
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--spacing-sm) var(--spacing-xxl);
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--white);
+  color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+}
+
+.btnPrimary {
+  color: var(--color-secondary);
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-tertiary);
+}
+
+.btnSecondary {
+  color: var(--white);
+  background-color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+}
+
+.btnWhite {
+  color: var(--color-primary);
+  background-color: var(--white);
+  border: 1px solid var(--white);
+}
+
+input {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background-color: transparent;
+  color: white;
+  border: 1px solid var(--color-tertiary);
+  border-radius: 0.25rem;
+}
+
+input::placeholder {
+  color: var(--color-tertiary);
+}
+
+input:focus {
+  outline: none;
+}
+
+::-webkit-scrollbar {
+  width: 1px;
+}
+
+
+textarea {
+  min-height: 3rem;
+  width: 100%;
+  resize: vertical;
+  background-color: transparent;
+  color: white;
+  border: none;
+  border-bottom: 1px solid var(--color-tertiary);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-h3);
+}
+
+textarea::placeholder {
+  color: var(--color-tertiary);
+}
+
+textarea:focus {
+  outline: none;
+}
+
+.modal .ant-modal-content {
+  background-color: var(--color-primary);
+  color: var(--white);
+}
+
+.modal .ant-modal-body > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+}
+
+.modal .ant-modal-close {
+  color: var(--white);
+}
+
+.modal .ant-modal-close:hover {
+  color: var(--color-secondary);
 }

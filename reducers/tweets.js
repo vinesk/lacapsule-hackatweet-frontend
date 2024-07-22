@@ -1,29 +1,33 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   value: [],
 };
 
 export const tweetsSlice = createSlice({
-  name: 'tweets',
+  name: "tweets",
   initialState,
   reducers: {
     addTweetsToStorage: (state, action) => {
-      state.value.push(action.payload)
+      state.value.push(action.payload);
     },
-    updateLikeTweet:(state, action)=>{///changer message par id
+    updateTweetsToStorage: (state, action) => {
+      state.value=action.payload;
+    },
+    updateLikeTweet:(state, action)=>{
         for(let tweet of state.value){
-            if (tweet.user==action.payload.user){
-                if(action.payload.likes.includes(action.payload.user)){
-                    tweet.likes=action.payload?.likes.filter((user)=>user?.id!=action.payload.id)
-                }else{
-                    tweet.likes.push(action.payload.user);
-                }
+            if (tweet.id==action.payload.tweet.id){
+              tweet.likes=action.payload.tweet.likes;
+                // if(tweet.likes.includes(action.payload.username)){
+                //     tweet.likes=tweet.likes.filter((user)=>user!==action.payload.username)
+                // }else{
+                //     tweet.likes.push(action.payload.username);
+                // }
               break;
             }
         }
     },
-    deleteTweetToStorage: (state, action) => {///changer message par id
+    deleteTweetToStorage: (state, action) => {
       if(action.payload.username==state.value.username){
         state.value=state.value.filter(tweet=> tweet.id!==action.payload.id)
       }
@@ -31,5 +35,6 @@ export const tweetsSlice = createSlice({
   },
 });
 
-export const { addTweetsToStorage ,updateLikeTweet,deleteTweetToStorage} = tweetsSlice.actions;
+export const { addTweetsToStorage,updateTweetsToStorage, updateLikeTweet, deleteTweetToStorage } =
+  tweetsSlice.actions;
 export default tweetsSlice.reducer;

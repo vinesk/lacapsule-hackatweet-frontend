@@ -1,0 +1,38 @@
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.trendContainer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-md);
+  background-color: var(--color-trend);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.trendContainer:hover {
+  background-color: var(--color-trend-hover);
+}
+
+.trendContainer:first-child {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+}
+
+.trendContainer:last-child {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
+.trendName {
+  font-weight: 700;
+}
+
+.trendCount {
+  color: var(--color-tertiary);
+  font-size: 0.75rem;
+}

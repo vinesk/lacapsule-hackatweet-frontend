@@ -1,133 +1,216 @@
-import styles from '../styles/Home.module.css';
-import Tweet from './Tweet';
-import Link from 'next/link';
-
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faXTwitter} from '@fortawesome/free-brands-svg-icons';
-
-import {useState} from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { addTweetsToStorage,updateLikeTweet,deleteTweetToStorage,updateTweetsToStorage} from '../reducers/tweets';
-import { addHashtagsToStorage,updateHashtagsToStorage} from '../reducers/hashtags';
+import Link from "next/link";
+import { useState,useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addTweetsToStorage,
+  updateTweetsToStorage,
+  updateLikeTweet,
+  deleteTweetToStorage,
+} from "../reducers/tweets";
+import {updateHashtagsToStorage,addHashtagsToStorage} from "../reducers/hashtags";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faXTwitter } from "@fortawesome/free-brands-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import Tweet from "./Tweet";
+import styles from "../styles/Home.module.css";
+import Trends from "./Trends";
 
 
 function Home() {
   const[fieldTweet,setFieldTweet]=useState("What's up?")
-  //const[tweets,setTweets]=useState([])
-  //const[hashtags,setHashtags]=useState([])
-
+  const user=useSelector((state)=>state.user.value)
   const hashtags=useSelector((state)=>state.hashtags.value)
   const tweets=useSelector((state)=> state.tweets.value)
   const dispatch=useDispatch();
   
-  const user={
-    isConnected:'SAPL5I-YBSrJY2ceLNy1IvMod9xBdUFF',
-    firstname:'Jules',
-    username:'Jules',
-    password: '$2b$10$60XKLTJ2w9IJrHh9xK9/TuyptjPKGQBvh2Wj4DeN5tGMU1x2PDulS',
-  }
 
-  //useEffect()
+  useEffect(()=>{
+
+    fetch('http://localhost:3000/tweets/')
+    .then(response => response.json())
+    .then((data)=>{
+      if(data.data){
+        console.log('displayTweetInBDD',data.data)
+        const dataTweets=data.data.map((tweet)=> {return {
+          id:tweet.id,
+          user:tweet.username,
+          message:tweet.message,
+          date:tweet.date,
+          likes:tweet.likes,
+          hashtags:tweet.hashtags
+        }})
+        console.log('send',dataTweets)
+        dispatch(updateTweetsToStorage(dataTweets))
+      }
+    })
+
+  },[])
+
+  useEffect(()=>{
+    fetch('http://localhost:3000/trends/allTrends')
+    .then(response => response.json())
+    .then((data)=>{
+      if(data.result){
+        console.log('displayTrenInBDD')
+        const dataHashtag=data.trends.map(trend=> {return trend.hashtag})
+        dispatch(updateHashtagsToStorage(dataHashtag))
+      }
+    })
+  },[])
 
   function handleTweetBtn(){
-    
-    if(user.isConnected){
-      let match=fieldTweet.match(/#\w*/ig)
-      let newHashtag=[...new Set(match)]
-      console.log(hashtags)
-      //let likes=[];
-      // let newTweet={
-      //   _id:0,
-      //   user:'Jules',
-      //   message:fieldTweet,
-      //   likes:likes,
-      //   date:Date(),
-      //   hashtags:newHashtag,
-      // }
+    if(user.token){
+
+      const match=fieldTweet.match(/#\w+/ig)
+      const newHashtag=[...new Set(match)]
 
       fetch('http://localhost:3000/tweets/add',
         {method:'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            token:user.isConnected,
+            token:user.token,
             message: fieldTweet,
             hashtags: newHashtag,
           }),
         }
       ).then(response => response.json())
       .then(data => {
-        console.log(data)
         dispatch(addTweetsToStorage({
           id:data.id._id,
-          user:data.user,
-          message:data.id.message,
+          user:user.username,
+          message:fieldTweet,
           date:data.id.date,
-          likes:data.id.likes,
+          likes:[],
           hashtags:data.id.hashtags
         }))
         if(newHashtag ){
-          console.log('tweet',)
-          //setHashtags([...hashtags,...newHashtag])
+          newHashtag.forEach((e)=> addTrend(e,data.id._id))
           dispatch(updateHashtagsToStorage([...hashtags,...newHashtag]))
+          console.log('hashtag :',hashtags)
         }
       });
     }
-    setFieldTweet('')
+    setFieldTweet("");
+  };
+
+  const addTrend = (hashtag,idTweet) => {
+    fetch('http://localhost:3000/trends/addTrend',
+      {method:'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          hashtag,idTweet
+        }),
+      }
+    ).then(response => response.json())
+    .then(data => {
+      if(data.result) console.log('new trend add')
+    })
   }
 
-  function updateLike(props){
-    dispatch(updateLikeTweet(props));
-  }
 
-  // function getTweet(){
-  //   fetch(`http://localhost:3000/tweets/`,{
-  //   }).then(response => response.json())
-  //     .then((data) => {
-  //       return data;
-  //     })
-  // }
+  const updateLike = (props) => {
+    console.log('like btn')
+    if(user.token){
+      fetch('http://localhost:3000/tweets/like',
+        {method:'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            token:user.token,
+            id: props.id,
+          }),
+        }
+      ).then(response => response.json())
+      .then(data => {
+        if(data.result){
+          console.log('like added',data.result)
+          dispatch(updateLikeTweet({
+            tweet:{
+              id:props.id,
+              user:props.user,
+              message:props.message,
+              date:props.date,
+              likes:data.likes,
+              hashtags:props.hashtags
+            },
+            username:user.username
+          }))
+        }
+      })
+    }
+  }
 
   function deleteTweet(props){
-    fetch(`http://localhost:3000/tweets/${props.id}`,{
-        method: 'DELETE'
-    }).then(response => response.json())
-    dispatch(deleteTweetToStorage(props));
+    if(props.user==user.username){
+      fetch(`http://localhost:3000/tweets/${props.id}`,{
+          method: 'DELETE'
+      }).then(response => response.json())
+      .then(()=>{
+        dispatch(deleteTweetToStorage({
+            id:props.id,
+            user:props.user,
+            message:props.message,
+            date:props.date,
+            likes:props.likes,
+            hashtags:props.hashtags
+          }));
+      })
+    }
   }
   
-  const listHashtags=[...new Set(hashtags)].map((h)=>{
-    const nbH=hashtags.filter(x=> x==h).length;
-    return <div>
-      <Link href="/hashtag"><span  className={styles.hashtagsLink}>{h}</span></Link>
-      <div className={styles.grey}>{nbH } Tweet{nbH>1&& 's'}</div>
-    </div>
-    
+  const trends=[...new Set(hashtags)].map((hashtag,i)=>{
+    const trendCount=hashtags.filter(e=> e==hashtag).length;
+    return <Trends key={i} trendCount={trendCount} trendName={hashtag} />
   })
-  const listTweets=tweets.map((tweet,i)=> {return <Tweet key={i} {...tweet} updateLike={() => updateLike({...tweet})} deleteTweet={deleteTweet}/> ;})
+
+  const listTweets=tweets.map((tweet,i)=> {return <Tweet key={i} {...tweet} updateLike={updateLike} deleteTweet={deleteTweet}/> ;})
   return (
     <div>
-      <div className={styles.container}>
+      <div className={styles.mainContainer}>
         <div className={styles.leftContainer}>
-          <FontAwesomeIcon icon={faXTwitter} onClick={() => {}} className={styles.logo} style={{'color':'white'}}/>;
+          <Link href="/">
+            <FontAwesomeIcon icon={faXTwitter} className={styles.logo} />
+          </Link>
+          <div className={styles.userContainer}>
+            <FontAwesomeIcon icon={faUser} className={styles.userIcon} />
+            <div className={styles.userInfos}>
+              <p className={styles.userFirstname}>{user.firstname}</p>
+              <p className={styles.userUsername}>@{user.username}</p>
+            </div>
+          </div>
         </div>
-        <div className={styles.centerContainer}>
-          <h3 className={styles.title}>Home</h3>
-          <div className={styles.center}>
-            <textarea className={styles.textarea}  rows="4" cols="1" placeholder="What's up?" maxLength={280} value={fieldTweet} onChange={(e)=>setFieldTweet(e.target.value)}/>
+
+        <div className={styles.middleContainer}>
+          <div className={styles.formContainer}>
+            <h3 className={styles.title}>Home</h3>
+            <div className={styles.form}>
+              <textarea
+                placeholder="What's up?"
+                maxLength={280}
+                value={fieldTweet}
+                onChange={(e) => setFieldTweet(e.target.value)}
+              />
+              <div className={styles.formSubmit}>
+                <span className={styles.textareaLength}>
+                  {fieldTweet.length}/280
+                </span>
+                <button
+                  className={`btnSecondary ${styles.submitBtn}`}
+                  onClick={handleTweetBtn}
+                >
+                  Tweet
+                </button>
+              </div>
+            </div>
           </div>
-          <div className={styles.fieldData}>
-            <p className={styles.white}>{fieldTweet.length}/280</p>
-            <button  className={styles.tweetBtn} onClick={()=>handleTweetBtn()}>Tweet</button>
-          </div>
-          <div className={styles.tweetsContainer}> 
+          <div className={styles.tweetsContainer}>
             {listTweets}
           </div>
         </div>
-        <div className={styles.rightContainer}>
+
+        <div className={styles.trendsContainer}>
           <h3 className={styles.title}>Trends</h3>
-          <div className={styles.center}>
-            <div className={styles.HashtagsContainer}>
-              {listHashtags}
-            </div>
+          <div className={styles.trendsContainer}>
+            {trends}
           </div>
         </div>
       </div>

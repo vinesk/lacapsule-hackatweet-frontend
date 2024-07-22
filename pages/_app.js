@@ -1,33 +1,25 @@
 import '../styles/globals.css';
 import Head from 'next/head';
 
-import tweets from '../reducers/tweets';
-import hashtags from '../reducers/hashtags';
 import { Provider } from 'react-redux';
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 
-import { persistStore, persistReducer } from 'redux-persist';
-import { PersistGate } from 'redux-persist/integration/react';
-import storage from 'redux-persist/lib/storage';
 
-//const reducers= combineReducers({tweets,hashtags})
-//const persistConfig ={key: 'hackatweet',storage};
-
+import user from "../reducers/user";
+import tweets from "../reducers/tweets";
+import hashtags from "../reducers/hashtags";
 
 const store = configureStore({
-  reducer: { tweets,hashtags },//persistReducer(persistConfig,reducers),
+  reducer: { user, tweets, hashtags },
 });
 
 function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      {/* <PersistGate persistor={persistor}> */}
-
       <Head>
-        <title>Next.js App</title>
+        <title>HACKATWEET</title>
       </Head>
       <Component {...pageProps} />
-      {/* </PersistGate> */}
     </Provider>
   );
 }

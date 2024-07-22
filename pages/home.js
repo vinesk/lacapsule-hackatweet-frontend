@@ -1,8 +1,9 @@
 import Home from '../components/Home';
-//import Header from '../components/Header';
+import Login from '../components/Login';
+import { useSelector} from "react-redux";
 
-function HomePage() {
-  return <Home/>
+export default function HomePage() {
+  const user=useSelector((state)=>state.user.value)
+  if(user.token) return <Home/>;
+  return <Login/>;
 }
-
-export default HomePage;
