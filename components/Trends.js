@@ -10,9 +10,7 @@ function Trends() {
   const [trendsData, setTrendsData] = useState([]);
 
   useEffect(() => {
-    fetch(
-      `https://lacapsule-hackatweet-backend.vercel.app/tweets/trends/${user.token}`
-    )
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tweets/trends/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         data.result && setTrendsData(data.trends);

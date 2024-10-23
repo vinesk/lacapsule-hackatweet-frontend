@@ -27,9 +27,7 @@ function Home() {
       return;
     }
 
-    fetch(
-      `https://lacapsule-hackatweet-backend.vercel.app/tweets/all/${user.token}`
-    )
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tweets/all/${user.token}`)
       .then((response) => response.json())
       .then((data) => {
         data.result && dispatch(loadTweets(data.tweets));
@@ -46,7 +44,7 @@ function Home() {
   };
 
   const handleSubmit = () => {
-    fetch("https://lacapsule-hackatweet-backend.vercel.app/tweets", {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/tweets`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: user.token, content: newTweet }),

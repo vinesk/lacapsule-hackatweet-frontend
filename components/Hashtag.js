@@ -31,7 +31,7 @@ function Hashtag() {
     setQuery("#" + hashtag);
 
     fetch(
-      `https://lacapsule-hackatweet-backend.vercel.app/tweets/hashtag/${user.token}/${hashtag}`
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/tweets/hashtag/${user.token}/${hashtag}`
     )
       .then((response) => response.json())
       .then((data) => {
